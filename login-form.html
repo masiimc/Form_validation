@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="styles/loginform.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row-1" id="row-1">
+            <form class="signup" name="form-1" onsubmit="return _send()" action="">
+
+                <h2>Create Account</h2>
+                <div class="social">
+                    <a href="https://www.linkedin.com/in/masome-spring/" target="_blank"><i
+                            class="bi bi-linkedin"></i></a>
+                    <a href="https://instagram.com/mahmudi_web?igshid=ZDdkNTZiNTM=" target="_blank"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="mailto:springmasome@gmail.com"><i class="bi bi-google"></i></a>
+                </div>
+                <div class="name">
+                    <label for="name">Name :</label>
+                    <input type="text" name="name" placeholder="Full Name" id="name">
+                    <span id="_span1"></span>
+                </div>
+                <div class="username">
+                    <label for="usName">User Name :</label>
+                    <input type="text" name="usName" placeholder="@user name" id="usName">
+                    <span id="_span2"></span>
+                </div>
+
+                <div class="password">
+                    <label for="pass1">Password :</label>
+                    <input type="password" name="pass1" id="pass1" placeholder="Password">
+                    <span id="_span3"></span>
+
+                    <label for="pass2">Enter again :</label>
+                    <input type="password" name="pass2" id="pass2" placeholder="Password">
+                    <span id="_span4"></span>
+                </div>
+                <div class="email">
+                    <label for="email">Email :</label>
+                    <!-- required -->
+                    <input type="text" name="email" placeholder="helen@gmail.com" id="email">
+                    <span id="_span5"></span>
+                </div>
+
+                <div class="number">
+                    <label for="number">No.</label>
+                    <input type="text" name="number" oninput="_validPhoneNumber()" placeholder="09..." id="number">
+                    <span id="_span6"></span>
+                </div>
+
+
+                <button id="btn">SIGN UP</button>
+                <a href="#href">continue with google</a>
+
+            </form>
+            <!-- *******************form 2 -->
+            <div class="form-2" id="form-2">
+                <h2>Sign in</h2>
+                <div class="social">
+                    <a href="https://www.linkedin.com/in/masome-spring/" target="_blank"><i
+                            class="bi bi-linkedin"></i></a>
+                    <a href="https://instagram.com/mahmudi_web?igshid=ZDdkNTZiNTM=" target="_blank"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="mailto:springmasome@gmail.com"><i class="bi bi-google"></i></a>
+                </div>
+
+                <div>
+                    <label for="k">Email :</label>
+                    <input type="text" placeholder="Email" id="k">
+                </div>
+                <div>
+                    <label for="p">Password :</label>
+                    <input type="password" placeholder="Password" id="p">
+                </div>
+
+                <a href="#">Forget your Password?</a>
+
+                <button>SIGN IN</button>
+            </div>
+        </div>
+
+        <!-- overly -->
+        <div class="overly">
+            <h2>Hello Feriend!</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis tempore a qui iure illum </p>
+            <button onclick="_move()">SIGN UP</button>
+        </div>
+
+
+    </div>
+
+
+
+
+    <a href="https://github.com/masiimc" target="_blank" class="b"><strong>Developed by Masome Mahmodi</strong></a>
+    <script>
+
+
+        _form = document.forms['form-1'];
+        _form['name'].focus();
+
+        const regx1 = /[a-z]/;
+        // const regx2 = /[0-9]/;
+        const regx3 = /[A-Z]/;
+        const regx4 = /[@|!#$%^&*()+-=[/?><.,'";:~`}]/;
+
+        function _send() {
+            const _name = _form['name'].value;
+            const _usName = _form['usName'].value;
+            const _pass1 = _form['pass1'].value;
+            const _pass2 = _form['pass2'].value;
+            const _email = _form['email'].value;
+            const _number = _form['number'].value;
+
+
+            // name
+            if (!_name ||
+                Number(_name) == 0 ||
+                _name[0] == ' ' ||
+                _name[0] == '_' ||
+                _name.length < 3 ||
+                /\d/.test(_name) ||
+                regx4.test(_name) ||
+                /<script/.test(_name) ||
+                /\\/.test(_name) ||
+                /]/.test(_name)
+            ) {
+                _form['name'].style.border = '1px solid red';
+                // text to span
+                document.querySelector('#_span1').innerHTML = 'It should not contain @#.. and numbers. contain at least 3 letters'
+                document.querySelector('#_span1').style.color = 'red';
+            } else {
+                _form['name'].style.border = '1px solid rgb(27, 142, 66)';
+                document.querySelector('#_span1').innerHTML = ''
+            }
+
+            // user name
+            if (
+                !_usName ||
+                Number(_usName) == 0 ||
+                _usName[0] == ' ' ||
+                _usName[0] == '_' ||
+                _usName[0] != '@' ||
+                _usName.length < 5 ||
+                /[,.<>?!(*-+/`~%^&|;:'")]/.test(_usName) ||
+                /<script/.test(_usName) ||
+                /\\/.test(_usName) ||
+                /]/.test(_usName)
+            ) {
+                _form['usName'].style.border = '1px solid red';
+                // text to span
+                document.querySelector('#_span2').innerHTML = 'Must be at least 5 letters and @ at the beginning and can include 12.. & _';
+                document.querySelector('#_span2').style.color = 'red';
+            } else {
+                _form['usName'].style.border = '1px solid rgb(27, 142, 66)';
+                // remove span text
+                document.querySelector('#_span2').innerHTML = '';
+            }
+
+            // password
+            if (
+                !_pass1 ||
+                Number(_pass1) == 0 ||
+                _pass1[0] == ' ' ||
+                _pass1.length < 8 ||
+                !/\d/.test(_pass1) ||
+                !regx3.test(_pass1) ||
+                !/[~!@#$%^&*()+{}[<>?,.]/g.test(_pass1) ||
+                /<script/i.test(_pass1)
+            ) {
+                _form['pass1'].style.border = '1px solid red';
+                // span text
+                document.querySelector('#_span3').innerHTML = 'At least 8 letters. uppercase and lowercase letters and 012.. and .. #$%';
+                document.querySelector('#_span3').style.color = 'red';
+            } else {
+                if (_pass1 != _pass2) {
+                    _form['pass2'].style.border = '1px solid red';
+                    _form['pass1'].style.border = '1px solid red';
+                    // add span 2 text
+                    document.querySelector('#_span4').innerHTML = 'They must be equal';
+                    document.querySelector('#_span4').style.color = 'red';
+                } else {
+                    _form['pass2'].style.border = '1px solid rgb(27, 142, 66)';
+                    // remove span 2 text
+                    document.querySelector('#_span4').innerHTML = '';
+                }
+                _form['pass1'].style.border = '1px solid rgb(27, 142, 66)';
+                // remove span 1 text
+                document.querySelector('#_span3').innerHTML = '';
+            }
+
+            // email
+            if (
+                !_email ||
+                Number(_email) == 0 ||
+                /\s/.test(_email) ||
+                !/@/.test(_email)
+            ) {
+                _form['email'].style.border = '1px solid red';
+                document.querySelector('#_span5').innerHTML = 'Enter correctly as input';
+                document.querySelector('#_span5').style.color = 'red';
+            } else {
+                _form['email'].style.border = '1px solid rgb(27, 142, 66)';
+                // remove span text
+                document.querySelector('#_span5').innerHTML = '';
+            }
+
+
+            // number
+            if (
+                !_number ||
+                Number(_number) == 0 ||
+                _number.length != 11 ||
+                _number[0] != 0 ||
+                _number[1] != 9 ||
+                /\s/.test(_number)
+            ) {
+                _form['number'].style.border = '1px solid red';
+                // add span text
+                document.querySelector('#_span6').innerHTML = 'It should contain 11 numbers';
+                document.querySelector('#_span6').style.color = 'red';
+            } else {
+                _form['number'].style.border = '1px solid rgb(27, 142, 66)';
+                // remove span text
+                document.querySelector('#_span6').innerHTML = '';
+            }
+
+
+            return false;
+        }
+
+        function _validPhoneNumber() {
+            let _temp = (event.target).value;
+            let _reg = new RegExp(']', 'g')
+            if (
+                /[a-z]/ig.test(_temp) ||
+                /[\\~!@#$%^&*+|/()_={}?><,.[;:'"`-]/.test(_temp) ||
+                _reg.test(_temp)
+            ) {
+                (event.target).value = ((event.target).value).substring(0, ((event.target).value).length - 1)
+
+            }
+        }
+
+        
+        let _f = 2;
+        function _move(){
+            const row1 = document.querySelector('#row-1'); 
+            const form2 = document.querySelector('#form-2');
+            const _overly = document.querySelector('.overly');
+            
+            if(_f % 2 == 0){
+                row1.classList.add('anime-1');
+                form2.classList.add('visiable');
+                _overly.classList.add('left');
+                _overly.classList.add('bg-2');
+                _overly.children[0].innerHTML = 'Welcome Back!';
+                _overly.children[1].innerHTML = 'laudantium quo. Amet nemo, eveniet ratione commodi consectetur temporibus dolorem reiciendis quisquam';
+                _overly.children[2].innerHTML = 'SIGN IN';
+                
+                _f++;
+            }else{
+                row1.classList.remove('anime-1');
+                form2.classList.remove('visiable');
+                _overly.classList.remove('left');
+                _overly.classList.remove('bg-2');
+                _overly.children[0].innerHTML = 'Hello Feriend!';
+                _overly.children[1].innerHTML = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis tempore a qui iure illum ";
+                _overly.children[2].innerHTML = 'SIGN UP';
+                
+                _f++;
+            }
+        }
+
+    </script>
+</body>
+
+</html>
